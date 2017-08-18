@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block main %}
+<div class="memo">
+<push></push>
+<div class="part">
+<p style="font-size:1.4em; margin-top: 0.25em;">输入口令，管理博客！</p>
+<br>
+<form method="POST">
+    <input type="password" name="password" />
+    <button type="submit" class="sm">确认!</button>
+</form> 
+<br><br>
+<small>
+<p>这里是破斧子更新博客的入口。如果您是访客，欢迎您在博文下评论</p>
+<p><a href="/">点击这里</a>回到首页</p>
+</small>
+</div>
+</div>
+{% endblock %}

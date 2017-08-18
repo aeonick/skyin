@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+{%- for result in results %}
+<div class="well big">
+<center>
+    <a href="/article/{{ result.id }}" target="_blank"><h2>{{ result.title }}</h2></a>
+    <small>Posted on : {{ result.date[0:10] }}</small>
+</center>
+    <div class="catetag">{{ info.cate[result.file] }}</div>
+    <pre>{{ result.abstract }}{{ result.img|safe }}</pre>
+    <small>
+    <span style="font-style:normal;">&#61484;&nbsp;</span>
+    {%- for tag in result.tag.split(',') %}
+    <a href="/arch/{{ tag }}/1"  class="nul"><span class="tag">{{ tag }}</span></a>
+    {%- endfor %}
+    </small>
+<center>
+    <a href="/article/{{ result.id }}"><button class="sm">阅读全文</button></a>
+</center>
+<br>
+</div>
+<br><br>
+{%- endfor %}
+{%- for num in pagn %}
+<a href='{{ num[2] }}'><pagn class="{{ num[1] }}">{{ num[0] }}</pagn></a>
+{%- endfor %}
+{% endblock %}

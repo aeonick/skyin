@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+
+{% block main %}
+<link href="http://cdn.bootcss.com/wangeditor/2.1.10/css/wangEditor.min.css" rel="stylesheet">
+<script src="http://cdn.bootcss.com/wangeditor/2.1.10/js/wangEditor.min.js"></script>
+<div class="memo">
+<push></push>
+    <form method="POST" id="article" onSubmit="return confirm0();">
+        <label>分类</label>
+        <select name="file" style="width:80px">
+        {%- for (id,cate) in info.cate.items() %}
+        <option value = "{{ id }}" {% if curArti.file==id %}selected="selected"{% endif %}>{{ cate }}</option>
+        {%- endfor %}
+        </select>
+        <label>标签</label>
+        <input name="tags" style="width:50%" value="{{ curArti.tag }}">
+        <br><br>
+        <label>标题</label>
+        <input name="title" id="title" style="width:75%" value="{{ curArti.title }}">
+        <br><br>
+        <label>封图</label>
+        <input id="img0" name="img" style="width:75%;" value="{{ curArti.img }}"><br><br>
+        <label>快速设置</label>
+        <input type="radio" name="abi" id="imgc"/> 选择
+        <input type="radio" checked="checked" name="abi" id="imgd" /> 取消
+        <div id="imgbox" style=""></div>
+        <br><br>
+        <textarea id="editor" name="editor" style="height:38em" type="text">{{ curArti.content }}</textarea>
+<script type="text/javascript">
+    var editor = new wangEditor('editor');
+    editor.config.uploadImgUrl = 'https://sm.ms/api/upload';
+    editor.config.uploadImgFileName = 'smfile';
+    editor.config.uploadImgFns.onload = function (resultText, xhr) {
+    var originalName = editor.uploadImgOriginalName || '';  
+    resultText = JSON.parse(resultText).data.url;
+    editor.command(null, 'InsertImage', resultText);
+    };
+    editor.create();
+</script>
+        <br>
+        <input name="id" hidden value="{{ curArti.id }}"/>
+        <button class="lg">发布博客</button>
+    </form>
+</div>
+{% endblock %}
