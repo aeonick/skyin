@@ -41,6 +41,12 @@ function confirm1() {
     window.location.reload(true);
     return false;
 };
+function confirm5() {
+    var content=$("#content").val();
+    if(!content)
+    {$("#content").attr("placeholder","写上内容再提交吧~");
+    return false;} 
+};
 function confirm0() {
     if(!$("#title").val()){alert("标题为空");return false;} 
     $.post("/post/article",$("#article").serialize(),function(data){window.location.href='/article/'+data;});
@@ -179,7 +185,7 @@ $(document).ready(function() {
     });
     $("reply").click(function(){
         $("#content").attr("placeholder","回复"+$(this).attr("aid")+"的评论，刷新页面撤销");
-        $("#content").attr("rid",$(this).attr("rid"));
+        $("#rid").val($(this).attr("rid"));
     });
     $("button.del").click(function(){
         $(this).next().toggle(300);

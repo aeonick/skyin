@@ -28,6 +28,7 @@
 <div id="mask"></div>
 {% block main %}
 <push></push>
+<div class="container">
 <div class="main">
 <div class="full">
 {% block content %}{% endblock %}
@@ -39,6 +40,7 @@
 <tab>标签</tab>
 <hr>
 {{ info.tags|safe }}
+</div>
 </div>
 </div>
 </div>

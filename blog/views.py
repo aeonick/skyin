@@ -83,8 +83,17 @@ def admin():
     if not session.get('log'):
         return redirect(url_for('login'))
     return render_template('admin.html',info=blogInfo(),cl=Comment().getNew())
-@app.route('/article/<int:bg_id>')
+@app.route('/article/<int:bg_id>', methods=['Get','POST'])
 def article(bg_id):
+    if request.method == 'POST':
+        author = request.form.get('author')
+        content = request.form.get('content')
+        rid = request.form.get('rid',type=int)
+        try:
+            Comment(bg_id).insert(content,author,rid)
+            return redirect(url_for('article',bg_id = bg_id))
+        except:
+            abort(500)
     if bg_id==0:
         return redirect(url_for('memo'))
     try:
